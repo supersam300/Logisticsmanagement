@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.example.madecie3.api.RetrofitClient
-import kotlinx.coroutines.launch
+import com.google.firebase.auth.FirebaseAuth
 
 class SignupActivity : AppCompatActivity() {
 
@@ -21,6 +19,7 @@ class SignupActivity : AppCompatActivity() {
         val confirmPassword = findViewById<EditText>(R.id.confirmPassword)
         val registerBtn     = findViewById<Button>(R.id.registerBtn)
         val progressBar     = findViewById<ProgressBar>(R.id.signupProgress)
+        val auth            = FirebaseAuth.getInstance()
 
         registerBtn.setOnClickListener {
             val nameText    = name.text.toString().trim()
@@ -30,33 +29,31 @@ class SignupActivity : AppCompatActivity() {
 
             if (nameText.length < 3)        { name.error = "Name must be at least 3 characters"; return@setOnClickListener }
             if (emailText.isEmpty())        { email.error = "Enter email"; return@setOnClickListener }
-            if (passText.length < 4)        { password.error = "Password must be at least 4 characters"; return@setOnClickListener }
+            if (passText.length < 6)        { password.error = "Password must be at least 6 characters"; return@setOnClickListener }
             if (passText != confirmText)    { confirmPassword.error = "Passwords do not match"; return@setOnClickListener }
 
             progressBar.visibility = View.VISIBLE
             registerBtn.isEnabled = false
 
-            lifecycleScope.launch {
-                try {
-                    // POST new user to FakeStore /users
-                    val response = RetrofitClient.api.createUser(
-                        mapOf("username" to nameText, "email" to emailText, "password" to passText)
-                    )
-                    if (response.isSuccessful && response.body() != null) {
-                        Toast.makeText(this@SignupActivity,
-                            "Account created! User ID: ${response.body()!!.id}", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
-                        finish()
-                    } else {
-                        Toast.makeText(this@SignupActivity, "Signup failed. Try again.", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e: Exception) {
-                    Toast.makeText(this@SignupActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
-                } finally {
+            auth.createUserWithEmailAndPassword(emailText, passText)
+                .addOnCompleteListener(this) { task ->
                     progressBar.visibility = View.GONE
                     registerBtn.isEnabled = true
+
+                    if (task.isSuccessful) {
+                        auth.currentUser?.updateProfile(
+                            com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                                .setDisplayName(nameText)
+                                .build()
+                        )
+                        Toast.makeText(this@SignupActivity, "Account created!", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@SignupActivity, DashboardActivity::class.java))
+                        finish()
+                    } else {
+                        val errorMessage = task.exception?.localizedMessage ?: "Signup failed. Try again."
+                        Toast.makeText(this@SignupActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
         }
     }
 }

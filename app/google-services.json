@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "275779513570",
+    "project_id": "classproject-d7a1c",
+    "storage_bucket": "classproject-d7a1c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275779513570:android:0732c9b7665e39a65d42bb",
+        "android_client_info": {
+          "package_name": "com.example.madecie3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275779513570-8fj9n50diqcpdbnvoarvt40ihmqi8jb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-8Hjv_Ce_H_eyWCeUy3-fsNRwJ_qvdXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275779513570-8fj9n50diqcpdbnvoarvt40ihmqi8jb0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

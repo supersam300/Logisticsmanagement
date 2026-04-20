@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
 
@@ -13,7 +14,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
+            val nextScreen = if (FirebaseAuth.getInstance().currentUser != null) {
+                DashboardActivity::class.java
+            } else {
+                LoginActivity::class.java
+            }
+            startActivity(Intent(this, nextScreen))
             finish()
         }, 2000)
     }

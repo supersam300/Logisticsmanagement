@@ -18,7 +18,7 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username (e.g. johnd)"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:padding="10dp"/>
 
@@ -37,6 +37,13 @@
         android:layout_height="wrap_content"
         android:text="Login"
         android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/googleLoginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Continue with Google" />
 
     <ProgressBar
         android:id="@+id/loginProgress"
@@ -57,7 +64,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hint: username=johnd, password=m38rmF$"
+        android:text="Use email/password or Google to sign in"
         android:textSize="11sp"
         android:textColor="#888888"
         android:layout_marginTop="8dp"/>
