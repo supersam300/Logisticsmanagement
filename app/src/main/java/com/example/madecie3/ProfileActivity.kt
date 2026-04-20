@@ -26,10 +26,19 @@ class ProfileActivity : AppCompatActivity() {
             return
         }
 
-        nameText.text = currentUser.displayName ?: "User"
+        nameText.text  = currentUser.displayName ?: "User"
         emailText.text = currentUser.email ?: "No email"
 
+        // SharedPreferences Use #2: Cache Firebase profile data locally
+        val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
+        prefs.edit()
+            .putString("cached_name",  currentUser.displayName ?: "User")
+            .putString("cached_email", currentUser.email ?: "No email")
+            .apply()
+
         logoutBtn.setOnClickListener {
+            // SharedPreferences Use #2: Clear local cache on logout
+            getSharedPreferences("prefs", MODE_PRIVATE).edit().clear().apply()
             auth.signOut()
             startActivity(Intent(this, LoginActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

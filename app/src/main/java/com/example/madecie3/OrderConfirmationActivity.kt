@@ -11,14 +11,22 @@ class OrderConfirmationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_confirmation)
 
-        val trackingId = intent.getStringExtra("trackingId")
-        val trackingText = findViewById<TextView>(R.id.trackingText)
-        val homeBtn = findViewById<Button>(R.id.homeBtn)
+        val trackingId        = intent.getStringExtra("trackingId") ?: "N/A"
+        val paymentMethod     = intent.getStringExtra("paymentMethod") ?: "Unknown"
+        val amount            = intent.getIntExtra("amount", 0)
 
-        trackingText.text = "Tracking ID: $trackingId"
+        val trackingText      = findViewById<TextView>(R.id.trackingText)
+        val paymentMethodText = findViewById<TextView>(R.id.paymentMethodText)
+        val amountPaidText    = findViewById<TextView>(R.id.amountPaidText)
+        val homeBtn           = findViewById<Button>(R.id.homeBtn)
+
+        trackingText.text      = "Tracking ID: $trackingId"
+        paymentMethodText.text = "Payment Method: $paymentMethod"
+        amountPaidText.text    = "Amount Paid: ₹$amount"
 
         homeBtn.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
         }
     }
-}
+}

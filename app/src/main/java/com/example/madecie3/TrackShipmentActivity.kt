@@ -20,6 +20,13 @@ class TrackShipmentActivity : AppCompatActivity() {
         val statusText  = findViewById<TextView>(R.id.statusText)
         val progressBar = findViewById<ProgressBar>(R.id.trackProgress)
 
+        // SharedPreferences Use #3: Pre-fill the last searched tracking ID
+        val prefs = getSharedPreferences("prefs", MODE_PRIVATE)
+        val lastId = prefs.getString("last_tracking_id", "")
+        if (!lastId.isNullOrEmpty()) {
+            input.setText(lastId)
+        }
+
         btn.setOnClickListener {
             val idText = input.text.toString().trim()
             if (idText.isEmpty()) {
@@ -40,6 +47,10 @@ class TrackShipmentActivity : AppCompatActivity() {
                     val response = RetrofitClient.api.getProduct(id)
                     if (response.isSuccessful && response.body() != null) {
                         val p = response.body()!!
+
+                        // SharedPreferences Use #3: Save this successful search for next time
+                        prefs.edit().putString("last_tracking_id", idText).apply()
+
                         statusText.text = """
                             📦 Shipment ID: ${p.id}
                             📌 Product: ${p.title}

@@ -7,9 +7,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Payment Successful"
-        android:textSize="22sp"
+        android:text="✅ Payment Successful!"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#2E7D32"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
 
@@ -17,15 +18,33 @@
         android:id="@+id/trackingText"
         android:text="Tracking ID:"
         android:textSize="18sp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <TextView
+        android:id="@+id/paymentMethodText"
+        android:text="Payment Method:"
+        android:textSize="15sp"
+        android:textColor="#555555"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <TextView
+        android:id="@+id/amountPaidText"
+        android:text="Amount Paid:"
+        android:textSize="15sp"
+        android:textColor="#555555"
+        android:layout_marginTop="6dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
 
     <Button
         android:id="@+id/homeBtn"
         android:text="Go to Dashboard"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</LinearLayout>
