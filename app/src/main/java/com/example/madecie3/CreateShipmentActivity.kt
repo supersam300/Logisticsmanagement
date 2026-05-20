@@ -42,8 +42,7 @@ class CreateShipmentActivity : AppCompatActivity() {
         val productTitle = intent.getStringExtra("productTitle")
 
         if (!productImg.isNullOrEmpty()) {
-            senderSection.visibility = android.view.View.GONE
-            // Pre-fill so it doesn't fail validation
+            // Pre-fill fields but leave them visible so they can be edited if needed
             sender.setText(productTitle ?: "Inventory Item")
             pickup.setText("Warehouse A")
 

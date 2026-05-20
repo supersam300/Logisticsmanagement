@@ -33,8 +33,8 @@ class PartnerShipmentAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val shipment = shipments[position]
         holder.trackingId.text = shipment.trackingId
-        holder.sender.text = shipment.sender.take(3)
-        holder.receiver.text = shipment.receiver.take(3)
+        holder.sender.text = shipment.sender
+        holder.receiver.text = shipment.receiver
         holder.weight.text = "${shipment.weight} KG"
         holder.status.text = shipment.status
         
