@@ -68,7 +68,7 @@ class ShipmentDetailsActivity : AppCompatActivity() {
             detailPrice.text = "$itemCount items"
             detailSenderName?.text = "User $userId"
             detailOrigin?.text = "Distribution Center"
-            detailText.text = "User ID: $userId\nItems: $itemCount\nStatus: In Transit\nOrigin: Distribution Center\nDestination: User $userId's Address\nETA: 2–5 business days"
+            detailText.text = "User ID: $userId\nItems: $itemCount\nStatus: Not Delivered\nOrigin: Distribution Center\nDestination: User $userId's Address\nETA: 2–5 business days"
 
             imagePlaceholder.visibility = View.VISIBLE
             image.visibility = View.GONE
@@ -82,10 +82,10 @@ class ShipmentDetailsActivity : AppCompatActivity() {
             val id = intent.getStringExtra("id")
             detailCategory.text = "SHIPMENT"
             detailTitle.text = "Tracking ID: $id"
-            detailPrice.text = "In Transit"
+            detailPrice.text = "Not Delivered"
             detailSenderName?.text = "N/A"
             detailOrigin?.text = "Bangalore"
-            detailText.text = "Status: In Transit\nFrom: Bangalore\nTo: Chennai\nPayment: Paid"
+            detailText.text = "Status: Not Delivered\nFrom: Bangalore\nTo: Chennai\nPayment: Paid"
             imagePlaceholder.visibility = View.VISIBLE
             image.visibility = View.GONE
             shipThisBtn.visibility = View.GONE

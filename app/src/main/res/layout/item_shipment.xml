@@ -24,7 +24,8 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:fontFamily="monospace"
-            android:letterSpacing="0.05" />
+            android:letterSpacing="0.05"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/shipmentCost"

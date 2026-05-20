@@ -22,7 +22,7 @@ class OrderAdapter(private val list: List<String>, private val context: android.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val orderId = list[position]
         holder.id.text = orderId
-        holder.status.text = "In Transit"
+        holder.status.text = "Not Delivered"
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ShipmentDetailsActivity::class.java)

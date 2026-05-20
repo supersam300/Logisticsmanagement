@@ -49,7 +49,7 @@ class FirestoreShipmentRepository(
         uid: String,
         trackingId: String
     ): Result<FirestoreShipment?> = suspendCancellableCoroutine { continuation ->
-        userShipments(uid)
+        firestore.collectionGroup("shipments")
             .whereEqualTo("trackingId", trackingId)
             .limit(1)
             .get()
@@ -87,10 +87,10 @@ class FirestoreShipmentRepository(
     suspend fun getAllShipments(): Result<List<FirestoreShipment>> =
         suspendCancellableCoroutine { continuation ->
             firestore.collectionGroup("shipments")
-                .orderBy("createdAt", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener { snapshot ->
                     val shipments = snapshot.documents.mapNotNull { it.toObject<FirestoreShipment>() }
+                        .sortedByDescending { it.createdAt }
                     if (continuation.isActive) {
                         continuation.resume(Result.success(shipments))
                     }
